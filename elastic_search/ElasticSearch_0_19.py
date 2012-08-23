@@ -17,7 +17,7 @@ class ElasticSearch:
         session.config.update({'max_retries':3})
         url = 'http://%s:%s/_cluster/nodes/_local/stats?all=true' % (
             self.agentConfig.get('elasticsearch_host', '127.0.0.1'),
-            self.agentConfig('elasticsearch_port', 9200)
+            self.agentConfig.get('elasticsearch_port', 9200)
         )
         response = session.get(url)
         return json.loads(response.content)
