@@ -24,10 +24,8 @@ class ElasticSearch:
 
     def load_data(self):
         response = self.getCluster()
-        stats = json.loads(response)
-
         results = dict()
-        for node in stats['nodes'].values():
+        for node in response['nodes'].values():
             results['DB Size']      = node['indices']['store']['size_in_bytes'] / 1048576
             results['Num Docs']     = node['indices']['docs']['count']
             results['CPU %']        = node['process']['cpu']['percent']
